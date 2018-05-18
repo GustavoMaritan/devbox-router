@@ -5,17 +5,26 @@ const Controller = require('./lib/router');
 class Router {
 
     static init(app, options) {
-        if (options.prefix) Controller._prefix(options.prefix);
+        let base = {
+            prefix: '',
+            folder: './src/core',
+            filename: 'controller.js',
+            actionFilter: (action, options) => {
+                return async (req, res) => {
+                    await action();
+                }
+            }
+        }
+        options = Object.assign(base, options);
 
-        const files = find.file(options.folder || './src/core', options.fileName || 'controller.js');
-        files.forEach(x => require(path.resolve(x)));
+        Controller._setOptions(options);
+
+        find.file(options.folder, options.filename)
+            .forEach(x => require(path.resolve(x)));
 
         for (let i in Controller.routes)
             Controller.routes[i].forEach(x => {
-                app[x.method](x.uri, options.actionFilter
-                    ? options.actionFilter(x.action, x.options)
-                    : async (req, res) => { await x.action(req, res) }
-                );
+                app[x.method](x.uri, options.actionFilter(x.action, x.options));
             });
 
         return Controller;

@@ -13,7 +13,7 @@ class Router {
     static init(app: express, options: {
         prefix?: string,
         folder?: 'src/core',
-        fileName?: 'controller.js',
+        filename?: 'controller.js',
         actionFilter?: Function
     }): Controller
 
