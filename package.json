@@ -1,0 +1,22 @@
+{
+  "name": "devbox-router",
+  "version": "1.0.0",
+  "description": "Gerenciar rotas da aplicação",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GustavoMaritan/devbox-router.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GustavoMaritan/devbox-router/issues"
+  },
+  "homepage": "https://github.com/GustavoMaritan/devbox-router#readme",
+  "dependencies": {
+    "devbox-recursive-find": "^1.0.2"
+  }
+}
