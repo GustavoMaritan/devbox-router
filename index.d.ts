@@ -6,6 +6,27 @@ declare interface Controller {
     static post(uri: String, options: {
         prefix?: boolean
     }, action: Function);
+
+    static get(action: Function);
+    static get(uri: String, action: Function);
+    static get(uri: String, prefix: boolean, action: Function);
+    static get(uri: String, options: {
+        prefix?: boolean
+    }, action: Function);
+
+    static put(action: Function);
+    static put(uri: String, action: Function);
+    static put(uri: String, prefix: boolean, action: Function);
+    static put(uri: String, options: {
+        prefix?: boolean
+    }, action: Function);
+
+    static delete(action: Function);
+    static delete(uri: String, action: Function);
+    static delete(uri: String, prefix: boolean, action: Function);
+    static delete(uri: String, options: {
+        prefix?: boolean
+    }, action: Function);
 }
 
 class Router {
@@ -29,6 +50,7 @@ class Router {
      * @example
      * 
      * require('devbox-router').controller('usuario');
+     * require('devbox-router').controller('cliente/telefone');
      * require('devbox-router').controller(__filename);
      */
     static controller(name: string): Controller

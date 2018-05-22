@@ -1,6 +1,6 @@
 {
   "name": "devbox-router",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Gerenciar rotas da aplicação",
   "main": "lib/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/GustavoMaritan/devbox-router.git"
   },
-  "author": "",
+  "author": "Gustavo Maritan <gustavomaritan@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/GustavoMaritan/devbox-router/issues"
