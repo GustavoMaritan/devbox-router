@@ -12,7 +12,7 @@ class Router {
             actionFilter: (action, options) => {
                 return async (req, res, next) => {
                     try {
-                        await action();
+                        await action(req, res, next);
                     } catch (error) {
                         console.log('Erro: ', ex.message);
                         res.status(500).json({ message: ex.message });
