@@ -36,6 +36,7 @@ class Router {
                 if (process.env.PRINT_ROUTES) console.log('        ', _padRight(x.method), ' - ', x.uri);
                 app[x.method](x.uri, options.actionFilter(x.action, x.options));
             });
+            if (process.env.PRINT_ROUTES) console.log('    ', '_________________________________________');
         }
         if (process.env.PRINT_ROUTES) console.log('__________________________________________');
 
