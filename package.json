@@ -1,6 +1,6 @@
 {
   "name": "devbox-router",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Gerenciar rotas da aplicação",
   "main": "index.js",
   "scripts": {
