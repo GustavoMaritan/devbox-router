@@ -80,8 +80,9 @@ class Router {
      * require('devbox-router').controller('usuario');
      * require('devbox-router').controller('cliente/telefone');
      * require('devbox-router').controller(__filename);
+     * require('devbox-router').controller(__filename, { opcoes todas rotas });
      */
-    static controller(name: string): Controller
+    static controller(name: string, options: Object): Controller
 }
 
 export = Router

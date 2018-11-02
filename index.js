@@ -43,8 +43,8 @@ class Router {
         return Controller;
     }
 
-    static controller(name) {
-        Controller._set(name);
+    static controller(name, options) {
+        Controller._set(name, options);
         return Controller;
     }
 }
