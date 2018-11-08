@@ -25,8 +25,14 @@ class Router {
 
         Controller._setOptions(options);
 
-        find.file(options.folder, options.filename)
-            .forEach(x => require(path.resolve(x)));
+        find.file(path.join(__dirname.split('node_modules')[0], options.folder), options.filename)
+            .forEach(x => {
+                try {
+                    require(path.resolve(x))
+                } catch (error) {
+                    console.error(x)
+                }
+            });
 
         if (process.env.PRINT_ROUTES) console.log('__________________________________________');
         if (process.env.PRINT_ROUTES) console.log('Rotas');
