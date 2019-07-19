@@ -30,7 +30,11 @@ class Router {
                 try {
                     require(path.resolve(x))
                 } catch (error) {
-                    console.error(x)
+                    if (process.env.SHOW_FULL_ERROR) {
+                        console.error(x, '\n', error)
+                    } else {
+                        console.error(x)
+                    }
                 }
             });
 
