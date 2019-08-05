@@ -20,6 +20,16 @@ router.init(app, {
     prefix: '/api', // Prefixo utilizado em todas rotas
     folder: 'src/core', //Pasta onde ficaram os controller
     filename: 'controller.js', // encontra todos arquivos dentro de folder que termina com controller.js
+    middlewares: [
+        (req, res, next) => {
+            req.one = 1;
+            next();
+        },
+        (req, res, next) => {
+            req.two = 2;
+            next();
+        }
+    ],
     actionFilter: (action, options) => { 
         // Ja vem como default
         // Sobrepor caso faça validações antes de chamar controller
@@ -36,6 +46,7 @@ router.init(app, {
             }
     }
 });
+
 ```
 #### Controllers
 ```javascript
@@ -88,4 +99,16 @@ $router.get('usuario/:id/telefones', { public: true }, async (req, res) => {
     //Codigo
     res.status(200).end();
 });
+
+// Usar middlewares em um controller especifico
+// Passando middlewares para um controller, os middlewares definidos como globais não serão aplicados a este controller
+const formatarCep = (req, res, next) => {
+    req.body.cep = req.body.cep.replace('-', '');
+    next();
+};
+$router.get('usuario/:id/endereco', { middlewares: [formatarCep] }, async (req, res) => {
+    //Codigo
+    res.status(200).end();
+});
+
 ```
