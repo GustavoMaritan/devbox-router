@@ -6,12 +6,14 @@ declare interface Controller {
     static post(uri: String, options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
     static post(options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
 
     static get(action: Function);
@@ -20,12 +22,14 @@ declare interface Controller {
     static get(uri: String, options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
     static get(options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
 
     static put(action: Function);
@@ -34,12 +38,14 @@ declare interface Controller {
     static put(uri: String, options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
     static put(options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
 
     static delete(action: Function);
@@ -48,22 +54,24 @@ declare interface Controller {
     static delete(uri: String, options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
     static delete(options: {
         prefix?: boolean,
         public?: boolean,
-        noOption?: boolean
+        noOption?: boolean,
+        middlewares?: Array<Function>
     }, action: Function);
 }
-
 class Router {
 
     static init(app: express, options: {
         prefix?: string,
         folder?: 'src/core',
         filename?: 'controller.js',
-        actionFilter?: Function
+        middlewares?: Array<Function>,
+        actionFilter?: Function  
     }): Controller
 
     /**
