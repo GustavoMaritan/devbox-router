@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/GustavoMaritan/devbox-router#readme",
   "dependencies": {
+    "colors": "^1.3.3",
     "devbox-recursive-find": "^1.0.5"
   }
 }
