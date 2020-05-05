@@ -84,7 +84,7 @@ class Router {
                 }
             });
 
-            if (print_route && Controller._errorRoutes[i]) {
+            if (print_route && !!Controller._errorRoutes && Controller._errorRoutes[i].length) {
                 console.log(`\t${colors.yellow(`* Rotas não registradas(${colors.red('CONFLITO')})`)}`);
                 Controller._errorRoutes[i].rotas.forEach(y => {
                     console.log('\t',
