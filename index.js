@@ -26,16 +26,12 @@ class Router {
 
         Controller._setOptions(options);
 
-        find.file(path.join(__dirname.split('node_modules')[0], options.folder), options.filename)
+        find.file(path.join(process.cwd().split('node_modules')[0], options.folder), options.filename)
             .forEach(x => {
                 try {
                     require(path.resolve(x))
                 } catch (error) {
-                    if (process.env.SHOW_FULL_ERROR) {
-                        console.error(x, '\n', error)
-                    } else {
-                        console.error(x)
-                    }
+                    console.error(x, '\n', error)
                 }
             });
 
@@ -45,7 +41,7 @@ class Router {
             if (process.env.PRINT_ROUTES) console.log('    ', i);
             Controller.routes[i].forEach(x => {
                 if (process.env.PRINT_ROUTES) console.log('        ', _padRight(x.method), ' - ', x.uri);
-                
+
                 if (x.options.middlewares && x.options.middlewares.length) {
                     app[x.method](x.uri, ...x.options.middlewares, options.actionFilter(x.action, x.options));
                 } else {
