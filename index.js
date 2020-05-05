@@ -9,6 +9,7 @@ class Router {
             prefix: '',
             folder: './src/core',
             filename: 'controller.js',
+            middlewares: null,
             actionFilter: (action, options) => {
                 return async (req, res, next) => {
                     try {
@@ -25,12 +26,12 @@ class Router {
 
         Controller._setOptions(options);
 
-        find.file(path.join(__dirname.split('node_modules')[0], options.folder), options.filename)
+        find.file(path.join(process.cwd().split('node_modules')[0], options.folder), options.filename)
             .forEach(x => {
                 try {
                     require(path.resolve(x))
                 } catch (error) {
-                    console.error(x)
+                    console.error(x, '\n', error)
                 }
             });
 
@@ -40,7 +41,12 @@ class Router {
             if (process.env.PRINT_ROUTES) console.log('    ', i);
             Controller.routes[i].forEach(x => {
                 if (process.env.PRINT_ROUTES) console.log('        ', _padRight(x.method), ' - ', x.uri);
-                app[x.method](x.uri, options.actionFilter(x.action, x.options));
+
+                if (x.options.middlewares && x.options.middlewares.length) {
+                    app[x.method](x.uri, ...x.options.middlewares, options.actionFilter(x.action, x.options));
+                } else {
+                    app[x.method](x.uri, options.actionFilter(x.action, x.options));
+                }
             });
             if (process.env.PRINT_ROUTES) console.log('    ', '_________________________________________');
         }
