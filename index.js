@@ -35,16 +35,18 @@ class Router {
                 try {
                     require(path.resolve(x))
                 } catch (error) {
-                    _controllerErro.push({ ctrl: x, error: error })
+                    let _controllerName = x.split('\\');
+                    _controllerErro.push({ ctrl: _controllerName[_controllerName.length - 2], error: error })
                 }
             });
 
         if (_controllerErro.length) {
-            console.log();
+            console.log(colors.red('___________________________________________________________\n'));
             console.log(colors.red('> Erros ao gerar controllers'));
             _controllerErro.forEach(x => {
+
                 console.log(colors.red(`\tController: ${colors.green(x.ctrl)}`));
-                console.error(x.error);
+                console.error('\t', x.error);
             });
             console.log(colors.red('___________________________________________________________\n'));
         }
