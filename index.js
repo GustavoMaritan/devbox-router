@@ -28,14 +28,26 @@ class Router {
 
         Controller._setOptions(options);
 
+        const _controllerErro = [];
+
         find.file(path.join(process.cwd().split('node_modules')[0], options.folder), options.filename)
             .forEach(x => {
                 try {
                     require(path.resolve(x))
                 } catch (error) {
-                    console.error(x, '\n', error)
+                    _controllerErro.push({ ctrl: x, error: error })
                 }
             });
+
+        if (_controllerErro.length) {
+            console.log();
+            console.log(colors.red('> Erros ao gerar controllers'));
+            _controllerErro.forEach(x => {
+                console.log(colors.red(`\tController: ${colors.green(x.ctrl)}`));
+                console.error(x.error);
+            });
+            console.log(colors.red('___________________________________________________________\n'));
+        }
 
         const print_route = process.env.PRINT_ROUTES;
         const methodColor = (method) => {
