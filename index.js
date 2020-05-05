@@ -44,9 +44,8 @@ class Router {
             console.log(colors.red('___________________________________________________________\n'));
             console.log(colors.red('> Erros ao gerar controllers'));
             _controllerErro.forEach(x => {
-
-                console.log(colors.red(`\tController: ${colors.green(x.ctrl)}`));
-                console.error('\t', x.error);
+                console.log(colors.gray(`\nController: ${colors.green(x.ctrl)}`));
+                console.error(x.error);
             });
             console.log(colors.red('___________________________________________________________\n'));
         }
